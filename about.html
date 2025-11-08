@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Digibooth</title>
+    <link rel="stylesheet" href="sidebar-style.css">
+    
+    <style>
+         @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+        body {
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            background: radial-gradient(circle, #a6b78d 0%, #fbf5e9 70%);
+            color: #3d4428;
+
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            text-align: center;
+        }
+
+        .container {
+            max-width: 900px;
+            padding: 20px;
+            margin: 0 auto;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .branding {
+            padding-bottom: 30px;
+            font-size: 13px;
+            color: #7c875c;
+            font-weight: 600;
+            letter-spacing: 0.3px;
+            opacity: 0.8;
+        }
+
+        h1 {
+            margin-top: 80px;
+            font-size: 28px;
+            color: #3d4428;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .about-team {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 30px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            margin-bottom: 50px;
+            flex-wrap: wrap;
+        }
+
+        .about-team img {
+            width: 250px;
+            height: 250px;
+            border-radius: 15px;
+            object-fit: cover;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .about-team .text {
+            max-width: 500px;
+            text-align: left;
+        }
+
+        .about-web {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+        }
+
+        .about-web h2 {
+            color: #4b552e;
+        }
+    </style>
+</head>
+
+<body>
+    <button class="menu-btn">☰</button>
+
+    <div class="sidebar">
+        <ul>
+            <li><a href="home.html">Home</a></li>
+            <hr>
+            <li><a href="about.html">About Us</a></li>
+            <hr>
+            <li><a href="privacy.html">Privacy Policy</a></li>
+            <hr>
+            <li><a href="faq.html">FaQs</a></li>
+            <hr>
+            <li><a href="contact.html">Contact Us</a></li>
+            <hr>
+            <li><a href="reviews.html">Reviews</a></li>
+            <hr>
+            <li><a href="spotlight.html">Spotlight</a></li>
+            <hr>
+            <li><a href="history.html">History</a></li>
+        </ul>
+    </div>
+
+    <h1>About Us</h1>
+
+    <div class="container">
+        <div class="about-team">
+            <img src="barisdua.jpg" alt="Baris Dua Team">
+            <div class="text">
+                <h2>About "Baris Dua"</h2>
+                <p>
+                    We are students from the Computer Science Department, class of 2024, who are currently in our third
+                    semester. Who are we, exactly? We call ourselves <strong>Baris Dua</strong> — haha, sounds a bit funny, but that’s the truth.
+                </p>
+                <p>
+                    Why <strong>“Baris Dua”</strong>? Its' not an official name, but its cuz when we first met during orientation (MPLS), we were coincidentally all
+                    sitting in the second row in class, and even now, we’re still sitting in the second row! We quickly became friends and have worked on
+                    multiple team-based assignments together.
+                </p>
+                <p>
+                    Lately, we’ve been learning about how to build a website.
+                    For this project assignment, we decided to learn how to create a website inspired by digital photobooths.
+                    The reason we chose Digibooth is simply because we love photobooths,
+                    even though there are already many similar ones out there in the market.
+                </p>
+                <p>
+                    Our goal is to create meaningful web applications that people can enjoy and interact with easily.
+                    Every detail, from layout to functionality, is crafted with care and teamwork, (and maybe some ai assistance xD)
+                </p>
+            </div>
+        </div>
+
+        <div class="about-web">
+            <h2>About Digibooth</h2>
+            <p><strong>Digibooth</strong> is a simple web-based photo booth app that allows users to take, edit, and
+                share their favorite memories directly from their browser — no app downloads required.</p>
+            <p>Our mission is to make digital creativity accessible, safe, and fun for everyone.</p>
+            <p>With Digibooth, you can explore various frames, stickers, and filters to personalize your photos
+                effortlessly. It’s a free, lightweight and modern alternative to actually going to a traditional photobooth.</p>
+        </div>
+    </div>
+
+    <footer class="branding">
+        digibooth by @barisdua
+    </footer>
+
+    <script>
+        const sidebar = document.querySelector(".sidebar");
+        const btn = document.querySelector(".menu-btn");
+        btn.addEventListener("click", () => {
+            sidebar.classList.toggle("open");
+        });
+    </script>
+</body>
+
+</html>

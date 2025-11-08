@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy - Digibooth</title>
+    <link rel="stylesheet" href="sidebar-style.css">
+
+    <style>
+         @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+        body {
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            background: radial-gradient(circle, #a6b78d 0%, #fbf5e9 70%);
+            color: #3d4428;
+
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            text-align: center;
+        }
+
+        .container {
+            max-width: 550px;
+            padding: 20px;
+            margin: 0 auto;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .branding {
+            padding-bottom: 30px;
+            font-size: 13px;
+            color: #7c875c;
+            font-weight: 600;
+            letter-spacing: 0.3px;
+            opacity: 0.8;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+
+        p {
+            font-size: 15px;
+            line-height: 1.6;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+
+<body>
+    <button class="menu-btn">☰</button>
+
+    <div class="sidebar">
+        <ul>
+            <li><a href="home.html">Home</a></li>
+            <hr>
+            <li><a href="about.html">About Us</a></li>
+            <hr>
+            <li><a href="privacy.html">Privacy Policy</a></li>
+            <hr>
+            <li><a href="faq.html">FaQs</a></li>
+            <hr>
+            <li><a href="contact.html">Contact Us</a></li>
+            <hr>
+            <li><a href="reviews.html">Reviews</a></li>
+            <hr>
+            <li><a href="spotlight.html">Spotlight</a></li>
+            <hr>
+            <li><a href="history.html">History</a></li>
+        </ul>
+    </div>
+
+    <div class="container">
+        <h1>Privacy Policy</h1>
+        <p>At Digibooth, your privacy is our top priority. We only collect data necesarry to offer our services. </p>
+        <p>If <strong>not logged in</strong>, all of your photos are processed locally on your device and are not uploaded or saved to any external server.</p> 
+        <p>If you choose to create an account or be <strong>logged in</strong>, we collect the information you provide to us, such as your email and username.
+            Saved photos and written reviews will be linked to your account. Aside from that, the pictures you take with us will be stored securely.</p>
+        <p>We respect your privacy and are committed to protecting it. No cookies or trackers are used on this site.</p>
+    </div>
+
+    <footer class="branding">
+        digibooth by @barisdua
+    </footer>
+
+    <script>
+        const sidebar = document.querySelector(".sidebar");
+        const btn = document.querySelector(".menu-btn");
+        btn.addEventListener("click", () => {
+            sidebar.classList.toggle("open");
+        });
+    </script>
+
+</body>
+
+</html>

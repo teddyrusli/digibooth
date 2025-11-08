@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Digibooth by @baris dua</title>
+  
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+    *{
+      padding: 0;
+      margin: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', 'sans-serif';
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      background: radial-gradient(circle, #a6b78d 0%, #fbf5e9 70%);
+      color: #3d4428; 
+      margin: 0;
+      padding: 20px;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+    }
+
+    .main-layout {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 30px;
+      width: 100%;
+      max-width: 1100px;
+      align-items: flex-start;
+      justify-content: center;
+    }
+
+    #photostrip-side {
+      flex: 0 0 auto;
+      width: 100%; 
+      max-width: 350px;
+    }
+
+    #controls-side {
+      flex: 0 0 auto;
+      width: 100%;
+      max-width: 350px;
+      min-width: 250px;
+      
+      background: rgba(251, 245, 233, 0.7); 
+      backdrop-filter: blur(5px); 
+      padding: 25px; 
+      border-radius: 20px; 
+      box-shadow: 0 0 128px 0 rgba(0, 0, 0, 0.1),
+                  0 32px 64px -48px rgba(0, 0, 0, 0.5); 
+
+      position: sticky;
+      top: 20px; 
+    }
+    
+    #controls-side h3 {
+      margin-top: 0;
+      text-align: center;
+      border-bottom: 1px solid white;
+      padding-bottom: 10px;
+    }
+
+    .color-palette {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      justify-content: center;
+      margin-top: 20px;
+      padding: 10px;
+    }
+
+    .color-button {
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      border: 3px solid #fff;
+      cursor: pointer;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+      transition: all 0.2s ease;
+    }
+    
+    .color-button:hover {
+      transform: scale(1.1);
+      border-color: #ddd;
+    }
+    
+    .color-button.selected {
+      transform: scale(1.1);
+      border-color: #a6b78d;
+    }
+
+    #next-to-sticker-btn {
+      display: block;
+      width: 100%;
+      margin-top: 20px;
+      padding: 12px;
+      border: 0; 
+      border-radius: 5px; 
+      background-color: #a6b78d;
+      color: #fbf5e9; 
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all .3s; 
+    }
+    #next-to-sticker-btn:hover {
+      opacity: 0.82; 
+    }
+
+    #photostrip-container {
+      padding: 20px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+      border-radius: 8px;
+      display: flex;
+      gap: 15px;
+      width: 100%;
+      box-sizing: border-box; 
+      transition: background-color 0.3s ease;
+    }
+
+    #photostrip-container img {
+      width: 100%; height: auto; display: block; border-radius: 4px;
+    }
+
+    #photostrip-container.layout-vertical {
+      flex-direction: column;
+    }
+
+    @media (max-width: 767px) {
+      .main-layout {
+        flex-direction: column;
+        align-items: center;
+      }
+      #photostrip-side, #controls-side {
+        width: 100%;
+        max-width: 400px; 
+      }
+      #controls-side {
+        position: static;
+      }
+    }
+  </style>
+</head><body>
+
+  <h1>2. Choose Frame Color</h1>
+
+  <div class="main-layout">
+    <div id="photostrip-side">
+      <div id="photostrip-container">
+        </div>
+    </div>
+    <div id="controls-side">
+      <h3>Colors</h3>
+      <div class="color-palette" id="color-palette">
+        <button class="color-button" data-color="#333333" style="background-color: #333333;" title="Dark Grey"></button>
+        <button class="color-button" data-color="#EFEFEF" style="background-color: #EFEFEF;" title="White"></button>
+        <button class="color-button" data-color="#a6b78d" style="background-color: #a6b78d;" title="Olive Green"></button>
+        <button class="color-button" data-color="#fbf5e9" style="background-color: #fbf5e9;" title="Cream"></button>
+        <button class="color-button" data-color="#FFB6C1" style="background-color: #FFB6C1;" title="Light Pink"></button>
+        <button class="color-button" data-color="#ADD8E6" style="background-color: #ADD8E6;" title="Light Blue"></button>
+      </div>
+      
+      <button id="next-to-sticker-btn">Add Stickers</button>
+    </div>
+  </div>
+
+  <script>
+    window.addEventListener('load', () => {
+
+      const container = document.getElementById('photostrip-container');
+      const colorPalette = document.getElementById('color-palette');
+      const colorButtons = document.querySelectorAll('.color-button');
+      const nextBtn = document.getElementById('next-to-sticker-btn');
+
+      const chosenLayout = sessionStorage.getItem("chosenLayout") || 'strip-v';
+      const chosenColor = sessionStorage.getItem("chosenColor") || '#333333';
+      
+      const photosJSON = sessionStorage.getItem("photoboothImages"); 
+      
+      if (!photosJSON) {
+        container.innerHTML = "<p>Error: Foto tidak ditemukan...</p>";
+        return;
+      }
+      
+      const capturedPhotos = JSON.parse(photosJSON);
+      container.style.backgroundColor = chosenColor;
+      
+      const initialSelectedButton = document.querySelector(`.color-button[data-color="${chosenColor}"]`);
+      if (initialSelectedButton) {
+        initialSelectedButton.classList.add('selected');
+      }
+
+      container.classList.add('layout-vertical');
+      let photoLimit = (chosenLayout === 'strip-3-pose') ? 3 : 4;
+      for(let i = 0; i < photoLimit && i < capturedPhotos.length; i++) {
+        const img = document.createElement('img');
+        img.src = capturedPhotos[i];
+        container.appendChild(img);
+      }
+      
+      colorPalette.addEventListener('click', (e) => {
+        if (e.target.classList.contains('color-button')) {
+          const newColor = e.target.dataset.color;
+          container.style.backgroundColor = newColor;
+          
+          colorButtons.forEach(btn => btn.classList.remove('selected'));
+          e.target.classList.add('selected');
+        }
+      });
+      
+      nextBtn.addEventListener('click', () => {
+        const finalColor = container.style.backgroundColor;
+        sessionStorage.setItem("chosenColor", finalColor);
+        window.location.href = "sticker.html";
+      });
+
+    });
+  </script>
+
+</body>
+</html>

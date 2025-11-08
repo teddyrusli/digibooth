@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Digibooth by @barisdua</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+  *{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', 'sans-serif';
+  }
+
+  body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0;
+    height: 100vh;
+    background: radial-gradient(circle, #a6b78d 0%, #fbf5e9 70%);
+    color: #3d4428;
+  }
+  .branding {
+    position: absolute;
+    top: 10px;
+    left: 15px;
+    font-size: 13px;
+    color: #3d4428;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+  }
+  .app-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+    width: 95%;
+    max-width: 1000px;
+    margin-top: 40px;
+  }
+  .preview-section {
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+  }
+  video {
+    border-radius: 10px;
+    width: 100%;
+    max-width: 640px;
+    height: auto;
+    background: #000;
+    object-fit: cover;
+  }
+  .countdown-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 150px;
+    color: white;
+    font-weight: bold;
+    text-shadow: 0 0 20px rgba(0,0,0,0.6);
+    display: none;
+    user-select: none;
+    pointer-events: none;
+  }
+  .photo-progress {
+    position: absolute;
+    bottom: 10px;
+    right: 15px;
+    font-size: 15px;
+    color: #3d4428; 
+    font-weight: 600;
+    display: none;
+    user-select: none;
+  }
+  .controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+    gap: 10px;
+  }
+  .controls button {
+    padding: 10px 20px;
+    border: 0; 
+    border-radius: 5px; 
+    cursor: pointer;
+    font-weight: bold;
+    transition: all .3s; 
+  }
+  .controls button:hover {
+    opacity: 0.82; 
+  }
+  .capture-btn {
+    background-color: #a6b78d;
+    color: #3d4428;
+  }
+  .stop-btn {
+    background-color: #ffbbbb;
+    color: #3d4428; 
+  }
+  .next-btn {
+    background-color: #a6b78d;
+    color: #fbf5e9; 
+  }
+  .photo-strip {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+  }
+  .photo-strip img {
+    width: 100%;
+    max-width: 180px;
+    border-radius: 8px;
+    object-fit: cover;
+    aspect-ratio: 4/3; 
+  }
+  @media (max-width: 768px) {
+    .app-container {
+      flex-direction: column;
+      align-items: center;
+    }
+    .photo-strip {
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .photo-strip img {
+      max-width: 45%;
+    }
+  }
+</style>
+</head>
+<body>
+  <div class="branding">digibooth by @barisdua</div>
+
+  <div class="app-container">
+    <div class="preview-section">
+      <video autoplay id="video"></video>
+      <div class="countdown-overlay" id="countdown"></div>
+      <div class="photo-progress" id="photo-progress"></div>
+      <div class="controls">
+        <button id="capture-btn" class="capture-btn">Capture</button>
+        <button id="stop-btn" class="stop-btn" style="display:none;">Stop Auto Capture</button>
+        <button id="next-btn" class="next-btn" style="display:none;">Next</button>
+      </div>
+    </div>
+    <div class="photo-strip" id="photo-strip"></div>
+  </div>
+
+<script>
+  const video = document.getElementById("video");
+  const captureBtn = document.getElementById("capture-btn");
+  const stopBtn = document.getElementById("stop-btn");
+  const nextBtn = document.getElementById("next-btn");
+  const photoStrip = document.getElementById("photo-strip");
+  const countdownOverlay = document.getElementById("countdown");
+  const photoProgress = document.getElementById("photo-progress");
+
+  let capturing = false;
+  let autoCaptureInterval;
+  let capturedCount = 0;
+  const maxPhotos = 4;
+
+  navigator.mediaDevices.getUserMedia({ video: { facingMode: "user" } })
+    .then(stream => video.srcObject = stream)
+    .catch(err => alert("Camera access denied. Check browser permissions."));
+
+
+  function captureFrame() {
+    if (capturedCount >= maxPhotos) {
+      stopAutoCapture();
+      return;
+    }
+
+    const videoRatio = video.videoWidth / video.videoHeight;
+    const targetRatio = 4 / 3; 
+
+    let sWidth, sHeight, sx, sy; 
+
+    if (videoRatio > targetRatio) {
+      sHeight = video.videoHeight;
+      sWidth = video.videoHeight * targetRatio; 
+      sx = (video.videoWidth - sWidth) / 2; 
+      sy = 0;
+    } else {
+      sWidth = video.videoWidth;
+      sHeight = video.videoWidth / targetRatio; 
+      sx = 0;
+      sy = (video.videoHeight - sHeight) / 2; 
+    }
+
+    const canvas = document.createElement("canvas");
+    const ctx = canvas.getContext("2d");
+    
+    canvas.width = sWidth;
+    canvas.height = sHeight;
+
+    ctx.drawImage(video, sx, sy, sWidth, sHeight, 0, 0, canvas.width, canvas.height);
+
+    const img = document.createElement("img");
+    img.src = canvas.toDataURL("image/png");
+    photoStrip.appendChild(img);
+
+    capturedCount++;
+    updatePhotoProgress();
+
+    if (capturedCount === maxPhotos) {
+      stopAutoCapture();
+      captureBtn.style.display = "none";
+      stopBtn.style.display = "none";
+      nextBtn.style.display = "inline-block";
+      photoProgress.style.display = "none";
+    }
+  }
+
+
+  function showCountdown(seconds, callback) {
+    let counter = seconds;
+    countdownOverlay.style.display = "block";
+    countdownOverlay.textContent = counter;
+
+    const countdownInterval = setInterval(() => {
+      counter--;
+      if (counter <= 0) {
+        clearInterval(countdownInterval);
+        countdownOverlay.style.display = "none";
+        callback();
+      } else {
+        countdownOverlay.textContent = counter;
+      }
+    }, 1000);
+  }
+
+  function updatePhotoProgress() {
+    if (capturing && capturedCount < maxPhotos) {
+      photoProgress.style.display = "block";
+      photoProgress.textContent = `${capturedCount + 1}/${maxPhotos}`;
+    } else if (capturedCount >= maxPhotos) {
+      photoProgress.style.display = "none";
+    }
+  }
+
+  captureBtn.addEventListener("click", () => {
+    if (!capturing) {
+      capturing = true;
+      captureBtn.textContent = "Capturing...";
+      stopBtn.style.display = "inline-block";
+      capturedCount = 0;
+      photoStrip.innerHTML = "";
+      updatePhotoProgress();
+
+      autoCaptureInterval = setInterval(() => {
+        showCountdown(3, captureFrame);
+      }, 4000);
+
+      showCountdown(3, captureFrame);
+    }
+  });
+
+  stopBtn.addEventListener("click", stopAutoCapture);
+  function stopAutoCapture() {
+    clearInterval(autoCaptureInterval);
+    capturing = false;
+    captureBtn.textContent = "Capture";
+    stopBtn.style.display = "none";
+    countdownOverlay.style.display = "none";
+    photoProgress.style.display = "none";
+  }
+
+  nextBtn.addEventListener("click", () => {
+    const capturedPhotos = [];
+    const images = photoStrip.querySelectorAll("img");
+    images.forEach(img => {
+      capturedPhotos.push(img.src);
+    });
+    sessionStorage.setItem("photoboothImages", JSON.stringify(capturedPhotos));
+    window.location.href = "frame.html";
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Digibooth by @baris dua</title>
+  
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+    
+    *{
+      padding: 0;
+      margin: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', 'sans-serif';
+    }
+    
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center; 
+      min-height: 100vh;
+      background: radial-gradient(circle, #a6b78d 0%, #fbf5e9 70%);
+      color: #3d4428;
+      padding: 20px;
+    }
+
+    .box {
+      background: rgba(251, 245, 233, 0.7);
+      backdrop-filter: blur(5px);
+      padding: 40px 50px;
+      border-radius: 20px;
+      box-shadow: 0 0 128px 0 rgba(0, 0, 0, 0.1),
+                  0 32px 64px -48px rgba(0, 0, 0, 0.5);
+      text-align: center;
+    }
+    
+    .box h1 {
+      font-size: 2.5em;
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+    
+    .box p {
+      font-size: 1.2em;
+    }
+    
+    .box .thank-you {
+      font-size: 1em;
+      margin-top: 15px;
+      opacity: 0.8; 
+    }
+    
+    .box .homepage-link {
+      margin-top: 30px; 
+    }
+    
+    .box a {
+      color: #a6b78d;
+      font-weight: 600;
+      text-decoration: none;
+      border-bottom: 2px solid #a6b78d;
+      transition: all 0.2s;
+    }
+    
+    .box a:hover {
+      color: #3d4428;
+      border-bottom-color: #3d4428;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="box">
+    <h1>Session Has Ended</h1>
+    
+    <p class="thank-you">
+      Thank you for using digibooth by @barisdua
+    </p>
+    
+    <p class="homepage-link">
+      <a href="home.html">Back to homepage</a>
+    </p>
+  </div>
+
+</body>
+</html>

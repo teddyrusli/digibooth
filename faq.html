@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ - Digibooth</title>
+    <link rel="stylesheet" href="sidebar-style.css">
+
+    <style>
+         @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+        body {
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            background: radial-gradient(circle, #a6b78d 0%, #fbf5e9 70%);
+            color: #3d4428;
+
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            text-align: center;
+        }
+
+        .container {
+            max-width: 550px;
+            padding: 20px;
+            margin: 0 auto;
+
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .branding {
+            padding-bottom: 30px;
+            font-size: 13px;
+            color: #7c875c;
+            font-weight: 600;
+            letter-spacing: 0.3px;
+            opacity: 0.8;
+        }
+
+        h1 {
+            color: #3d4428;
+            font-size: 28px;
+            font-weight: 700;
+            display: inline-block;
+            margin-bottom: 25px;
+        }
+
+        .faq-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            margin: 30px auto;
+            width: 90%;
+            max-width: 700px;
+        }
+
+        .faq-item {
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            padding: 20px 25px;
+            width: 100%;
+            text-align: left;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .faq-question {
+            font-size: 18px;
+            font-weight: 600;
+            color: #3d4428;
+            margin-bottom: 10px;
+        }
+
+        .faq-answer {
+            font-size: 15px;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .faq-answer a,
+        .faq-answer a:active,
+        .faq-answer a:visited {
+            color: #3d4428;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .faq-answer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container"></div>
+    <button class="menu-btn">☰</button>
+
+    <div class="sidebar">
+        <ul>
+            <li><a href="home.html">Home</a></li>
+            <hr>
+            <li><a href="about.html">About Us</a></li>
+            <hr>
+            <li><a href="privacy.html">Privacy Policy</a></li>
+            <hr>
+            <li><a href="faq.html">FaQs</a></li>
+            <hr>
+            <li><a href="contact.html">Contact Us</a></li>
+            <hr>
+            <li><a href="reviews.html">Reviews</a></li>
+            <hr>
+            <li><a href="spotlight.html">Spotlight</a></li>
+            <hr>
+            <li><a href="history.html">History</a></li>
+        </ul>
+    </div>
+
+    <h1>Frequently Asked Questions</h1>
+    <div class="faq-container">
+        <div class="faq-item">
+            <h3 class="faq-question">What is Digibooth?</h3>
+            <p class="faq-answer">
+                Digibooth is a free web application that lets you take photobooth style pictures.
+                Additionally, you can create, edit and share memorable photos with us too!
+            </p>
+        </div>
+
+        <div class="faq-item">
+            <h3 class="faq-question">Are my photos stored on the server?</h3>
+            <p class="faq-answer">
+                If you're logged in, yes. You can even access the pictures you've taken with us via the 
+                <a href="history.html">History Page</a>. But if you're anonymous, then no, all your pictures
+                are stored locally and will be gone if you refresh the page before downloading them.
+            </p>
+        </div>
+
+        <div class="faq-item">
+            <h3 class="faq-question">How long is one session?</h3>
+            <p class="faq-answer">
+                You get to take 4 pictures every session, with 3 seconds for each.
+            </p>
+        </div>
+
+        <div class="faq-item">
+            <h3 class="faq-question">Can I choose the frame?</h3>
+            <p class="faq-answer">
+                Yes, after finishing your photo, you can choose and apply a
+                frame layout and colour of your choice.
+            </p>
+        </div>
+
+        <div class="faq-item">
+            <h3 class="faq-question">Can I add stickers?</h3>
+            <p class="faq-answer">
+                Yes, definetly! You can add stickers to your result after picking your layout and colours.
+            </p>
+        </div>
+
+        <div class="faq-item">
+            <h3 class="faq-question">How can I contact your team?</h3>
+            <p class="faq-answer">
+                Visit the <a href="contact.html">Contact Us Page </a> to send a message directly
+                to barisdua!
+            </p>
+        </div>
+    </div>
+
+    <footer class="branding">
+        digibooth by @barisdua
+    </footer>
+
+    <script>
+        const sidebar = document.querySelector(".sidebar");
+        const btn = document.querySelector(".menu-btn");
+        btn.addEventListener("click", () => {
+            sidebar.classList.toggle("open");
+        });
+    </script>
+</body>
+
+</html>

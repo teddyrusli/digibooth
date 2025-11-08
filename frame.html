@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Digibooth by @baris dua</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+    *{
+      padding: 0;
+      margin: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', 'sans-serif';
+    }
+
+    body {
+      display: flex; 
+      align-items: center; 
+      justify-content: center; 
+      min-height: 100vh;
+      background: radial-gradient(circle, #a6b78d 0%, #fbf5e9 70%);
+      color: #3d4428;
+      padding: 20px;
+    }
+
+    .container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+    }
+
+    .box {
+      background: rgba(251, 245, 233, 0.7);
+      backdrop-filter: blur(5px);
+      display: flex;
+      flex-direction: column; 
+      align-items: center;   
+      padding: 25px 25px;
+      border-radius: 20px;
+      box-shadow: 0 0 128px 0 rgba(0, 0, 0, 0.1),
+                  0 32px 64px -48px rgba(0, 0, 0, 0.5);
+      width: 100%;
+      max-width: 550px; 
+    }
+    
+    h1 { 
+      font-size: 25px;
+      font-weight: 600;
+      padding-bottom: 10px;
+      border-bottom: 1px solid white;
+      margin-bottom: 30px; 
+      width: 100%; 
+      text-align: center;
+    }
+
+    .layout-selection {
+      display: flex;
+      flex-wrap: wrap; 
+      justify-content: center; 
+      gap: 30px; 
+      margin-bottom: 20px;
+    }
+    
+    .layout-preview {
+      border: 8px solid transparent; 
+      border-radius: 12px;
+      cursor: pointer;
+      background: #333; 
+      padding: 15px; 
+      transition: all 0.2s ease;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      display: flex;
+      flex-direction: column;
+      gap: 15px; 
+      align-items: center; 
+    }
+    .layout-preview.selected {
+      border-color: #a6b78d; 
+      transform: scale(1.05);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
+    .layout-preview .photo-hole {
+      background: white;
+      border: 1px solid #ccc; 
+      border-radius: 4px; 
+      width: 100px; 
+      height: 75px; 
+    }
+    #layout-strip-v { 
+      height: auto; 
+    }
+    #layout-a-preview { 
+      height: auto;
+    }
+
+    #next-btn-page2 {
+      margin-top: 20px;
+      padding: 15px 40px; 
+      border: 0; 
+      border-radius: 5px; 
+      cursor: pointer;
+      font-weight: bold; font-size: 18px; 
+      background-color: #a6b78d; color: #fbf5e9;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1); 
+      width: 100%; 
+      transition: all .3s; 
+    }
+    #next-btn-page2:disabled { background-color: #ccc; cursor: not-allowed; }
+    #next-btn-page2:hover:not(:disabled) {
+      opacity: 0.82; 
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div class="box">
+      <h1>1. Choose Your Frame</h1>
+      <div class="layout-selection" id="layout-selection">
+        
+        <div class="layout-preview" id="layout-strip-v" data-layout="strip-v">
+          <div class="photo-hole"></div>
+          <div class="photo-hole"></div>
+          <div class="photo-hole"></div>
+          <div class="photo-hole"></div>
+        </div>
+        
+        <div class="layout-preview" id="layout-a-preview" data-layout="strip-3-pose">
+          <div class="photo-hole"></div>
+          <div class="photo-hole"></div>
+          <div class="photo-hole"></div>
+        </div>
+        
+      </div>
+      <button id="next-btn-page2" disabled>Next</button>
+    </div>
+  </div>
+
+  <script>
+    const layoutSelection = document.getElementById("layout-selection");
+    const nextBtn = document.getElementById("next-btn-page2");
+    
+    let selectedLayout = null;
+    let selectedColor = "#333333"; 
+
+    layoutSelection.addEventListener("click", (e) => {
+      const target = e.target.closest(".layout-preview");
+      if (target) {
+        document.querySelectorAll(".layout-preview").forEach(div => {
+          div.classList.remove("selected");
+        });
+        target.classList.add("selected");
+        selectedLayout = target.dataset.layout;
+        nextBtn.disabled = false;
+      }
+    });
+
+    nextBtn.addEventListener("click", () => {
+      if (selectedLayout) {
+        sessionStorage.setItem("chosenLayout", selectedLayout);
+        sessionStorage.setItem("chosenColor", selectedColor); 
+        window.location.href = "display.html";
+      }
+    });
+  </script>
+
+</body>
+</html>

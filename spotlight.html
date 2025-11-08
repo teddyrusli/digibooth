@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spotlight - Digibooth</title>
+    <link rel="stylesheet" href="sidebar-style.css">
+</head>
+
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+    body {
+        font-family: 'Poppins', 'sans-serif';
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 0;
+        height: 100vh;
+        background: radial-gradient(circle, #a6b78d 0%, #fbf5e9 70%);
+        color: #3d4428;;
+    }
+
+    .branding {
+        margin-top: auto;
+        padding-bottom: 30px;
+        font-size: 13px;
+        color: #7c875c;
+        font-weight: 600;
+        letter-spacing: 0.3px;
+        opacity: 0.8;
+        }
+
+    .photostrip{
+        width: 100%;
+        max-width: 800px;
+        margin: 0 auto;
+        border-collapse: collapse;
+    }
+    .photostrip td{
+        padding:8px;
+        text-align: center;
+        width: 50%;
+    }
+    .photostrip img{
+        width: 80%;
+        height: auto;
+        max-width: 250px;
+        border-radius: 0;
+        object-fit: cover;
+    }
+
+</style>
+
+<body>
+    <button class="menu-btn">☰</button>
+
+    <div class="sidebar">
+        <ul>
+            <li><a href="home.html">Home</a></li>
+            <hr>
+            <li><a href="about.html">About Us</a></li>
+            <hr>
+            <li><a href="privacy.html">Privacy Policy</a></li>
+            <hr>
+            <li><a href="faq.html">FaQs</a></li>
+            <hr>
+            <li><a href="contact.html">Contact Us</a></li>
+            <hr>
+            <li><a href="reviews.html">Reviews</a></li>
+            <hr>
+            <li><a href="spotlight.html">Spotlight</a></li>
+            <hr>
+            <li><a href="history.html">History</a></li>
+        </ul>
+    </div>
+
+    <div class="intro-text">
+        <h1>Digibooth's Spotlight</h1>
+        <p>Each picture tells you a different story with different vibe, uncover yours now!</p>
+        <p>Hit us up if you want to be featured on our spotlight page!</p>
+    </div>
+
+    <table class="photostrip">
+        <tr>
+            <td><img src="photostrip/1.jpg" alt="spotlight1"></td>
+            <td><img src="photostrip/2.jpg" alt="spotlight2"></td>
+        </tr>
+        <tr>
+            <td><img src="photostrip/3.jpg" alt="spotlight3"></td>
+            <td><img src="photostrip/4.jpg" alt="spotlight4"></td>
+        </tr>
+        <tr>
+            <td><img src="photostrip/5.jpg" alt="spotlight5"></td>
+            <td><img src="photostrip/6.jpg" alt="spotlight6"></td>
+        </tr>
+    </table>
+
+    <footer class="branding">
+        digibooth by @barisdua
+    </footer>
+
+    <script>
+        const sidebar = document.querySelector(".sidebar");
+        const btn = document.querySelector(".menu-btn");
+
+        btn.addEventListener("click", () => {
+            sidebar.classList.toggle("open");
+        });
+  </script>
+    
+</body>
+</html>

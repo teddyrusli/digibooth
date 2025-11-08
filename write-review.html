@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Write Review — Digibooth</title>
+</head>
+
+<body>
+    <div class="container">
+        
+        <div class="box form-box">
+
+            <header>Write a Review</header>
+
+            <form action="" method="post">
+
+                <div class="field input">
+                    <label for="review">Your Review</label>
+                    <textarea 
+                        id="review" 
+                        name="review" 
+                        rows="7"
+                        maxlength="3000" 
+                        placeholder="Write your experience with Digibooth..."
+                        required
+                        style="
+                            resize: none;
+                            padding: 10px;
+                            font-size: 15px;
+                            border-radius: 5px;
+                            border: 1px solid #ccc;
+                            font-family: 'Poppins', sans-serif;
+                            outline: none;"></textarea>
+                    <small style="margin-top:5px; color:#7c875c;">Max 500 words</small>
+                </div>
+
+                <div class="field">
+                    <input type="submit" class="btn" value="Submit Review">
+                </div>
+
+                <div class="field" style="text-align:center; margin-top:10px;">
+                    <a href="reviews.html" style="
+                        color:#7c875c;
+                        font-weight:500;
+                        text-decoration:none;
+                        transition:0.3s;">
+                        ← Back to Reviews
+                    </a>
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</body>
+</html>

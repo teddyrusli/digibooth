@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digibooth by @barisdua</title>
+
+    <link rel="stylesheet" href="sidebar-style.css">
+
+<style>
+     @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+    body {
+        margin: 0;
+        font-family: 'Poppins', sans-serif;
+        background: radial-gradient(circle, #a6b78d 0%, #fbf5e9 70%);
+        color: #3d4428;
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+        text-align: center;
+    }
+
+    .intro-text {
+        max-width: 550px;
+        padding: 20px;
+        margin: 0 auto;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    h1 {
+        margin-bottom: 20px;
+        font-size: 2em;
+    }
+
+    p {
+        margin: 10px 0;
+        font-size: 1.1em;
+    }
+
+    .start-btn {
+        font-family: 'Poppins', sans-serif;
+        margin: 20px 0;
+        padding: 15px 35px;
+        border: none;
+        border-radius: 9999px;
+        background-color: #3d4428;
+        color: #fbf5e9;
+        font-size: 1.2em;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .start-btn:hover {
+        transform: translateY(-2px);
+    }
+
+    .tutorial-text a {
+        color: #7c875c;
+        text-decoration: none;
+        font-weight: 500;
+        transition: color 0.3s ease;
+    }
+
+    .tutorial-text a:hover {
+        color: #3d4428;
+        text-decoration: underline;
+    }
+
+    .login-link {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        color: #3d4428;
+        font-size: 1.1em;
+        font-weight: 600;
+        text-decoration: none;
+        transition: opacity 0.2s ease;
+        z-index: 1100;
+    }
+
+    .login-link:hover {
+        opacity: 0.6;
+    }
+
+    .branding {
+        padding-bottom: 30px;
+        font-size: 13px;
+        color: #7c875c;
+        font-weight: 600;
+        letter-spacing: 0.3px;
+        opacity: 0.8;
+    }
+</style>
+
+<body>
+
+    <a href="login.html" class="login-link">Log In</a>
+
+    <button class="menu-btn">☰</button>
+
+    <div class="sidebar">
+        <ul>
+            <li><a href="home.html">Home</a></li>
+            <hr>
+            <li><a href="about.html">About Us</a></li>
+            <hr>
+            <li><a href="privacy.html">Privacy Policy</a></li>
+            <hr>
+            <li><a href="faq.html">FaQs</a></li>
+            <hr>
+            <li><a href="contact.html">Contact Us</a></li>
+            <hr>
+            <li><a href="reviews.html">Reviews</a></li>
+            <hr>
+            <li><a href="spotlight.html">Spotlight</a></li>
+            <hr>
+            <li><a href="history.html">History</a></li>
+        </ul>
+    </div>
+
+    <div class="intro-text">
+        <h1>Welcome to Digibooth</h1>
+        <p>Influenced by our love of photobooths, this website is your personal photobooth at home!</p>
+        <p>Click start to begin your session!</p>
+        <a href="session-starts.html"><button class="start-btn">Start Session</button></a>
+        <p class="tutorial-text">Confused? Try reading our <a href="">tutorial</a></p>
+    </div>
+
+    <footer class="branding">
+        digibooth by @barisdua
+    </footer>
+
+<script>
+    const sidebar = document.querySelector(".sidebar");
+    const btn = document.querySelector(".menu-btn");
+
+    btn.addEventListener("click", () => {
+        sidebar.classList.toggle("open");
+    });
+</script>
+
+</body>
+</html>
